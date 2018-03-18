@@ -143,7 +143,7 @@ preencherMatrizComAlfabeto(tirarLetraDuplicadasAlfabeto(stringToArray(chave),alf
 
 function manipularMensagem(){
     const message = mensagem.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I').split('').filter(x => x !== ' ');
-    console.log("mensagem: " + message);
+    //console.log("mensagem: " + message);
     let messageModificada = '';
     for(let i = 0; i < message.length; i++){
         //1º Tentativa
@@ -184,19 +184,26 @@ function manipularMensagem(){
         }
         i++; //Passa para o próximo par
     }
-    console.log("Nova mensagem: " + stringToArray(messageModificada));
-    let pares = [];
-    vetNovaMensagem = stringToArray(messageModificada);
+    //console.log("Nova mensagem: " + stringToArray(messageModificada));
+    return stringToArray(messageModificada);
+}
 
-    for (let i = 0; i < vetNovaMensagem.length; i += 2) {
-        let duplaDaVez = vetNovaMensagem.slice(i, i+2);
+function quebraNovaMensagemEmPares(novaMensagem){
+    let pares = [];
+    //console.log(novaMensagem);
+    
+    for (let i = 0; i < novaMensagem.length; i += 2) {
+        let duplaDaVez = novaMensagem.slice(i, i+2);
         pares.push(duplaDaVez);
     }
 
     //console.log("pares: " + pares);
-    pares.forEach(par => {
+/*     pares.forEach(par => {
         console.log("par: " + par);
-    });
+    }); */
+
+    return pares;
 }
 
-manipularMensagem();
+quebraNovaMensagemEmPares(manipularMensagem());
+
