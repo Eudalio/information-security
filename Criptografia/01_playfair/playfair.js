@@ -10,7 +10,7 @@ let alfabeto = ['A','B','C','D','E',
 let coluna = 0;
 let linha = 0;
 let chave = "peixe assado".toUpperCase();
-let mensagem = "O cara e bom mesmo";
+let mensagem = "passaro";
 
 // Definindo a matriz
 let matriz = [[],[],[],[],[]];
@@ -136,7 +136,67 @@ function preencherMatrizComAlfabeto(novoAlfabeto){
             i--;
         }
     }
-    console.log("matriz completa: " + matriz)
+    //console.log("matriz completa: " + matriz);
 }
 
 preencherMatrizComAlfabeto(tirarLetraDuplicadasAlfabeto(stringToArray(chave),alfabeto));
+
+function manipularMensagem(){
+    const message = mensagem.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I').split('').filter(x => x !== ' ');
+    console.log("mensagem: " + message);
+    let messageModificada = '';
+    for(let i = 0; i < message.length; i++){
+        //1º Tentativa
+        
+        /* const dupleCurrent = message.slice(i, i + 2);
+        if(dupleCurrent[0] === dupleCurrent[1]){
+            message.slice(i+1,0,'X');
+            duples.push(message.slice(i, i + 2));   
+        } else if(dupleCurrent.length !== 2){
+            dupleCurrent.push('X');
+            duples.push(dupleCurrent);
+        } else{
+            duples.push(dupleCurrent);
+        } */
+
+        // ------------------------------------------------
+        
+        //2º Tentativa
+
+        if(message[i] == message[i+1]){//Caso em que o par(i,i+1) têm letras iguais
+            if(message[i] == "X" || message[i + 1] == "X"){//se a letra referente a i OU i+1 for um X
+                messageModificada += message[i] + "Z";//substituir letra repetida por um Z.
+            }else{
+                messageModificada += message[i] + "X";//Senão, substituir letra repetida por um X.
+            }
+        }else if(i < message.length -1){//Caso em que o i, é o penúltimo item (Evita de estourar a lista por conta do i+1)
+            messageModificada += message[i] + message[i+1];//adiciona o par i e i+1.
+        }else{
+            messageModificada += message[i];//Caso o i ja seja o último item, adiciona-se somente ele (i)
+        }
+
+        if(message.length % 2 !== 0 && i === message.length - 1){//Caso eu tenha uma mensagem de tamanho par e o i é o último item da lista
+            if(message[i] == "X"){//se a ultima letra for um X
+                messageModificada += "Z";//adiciona um Z no final
+            }else{
+                messageModificada += "X";//senão, adiciona um X
+            }
+        }
+        i++; //Passa para o próximo par
+    }
+    console.log("Nova mensagem: " + stringToArray(messageModificada));
+    let pares = [];
+    vetNovaMensagem = stringToArray(messageModificada);
+
+    for (let i = 0; i < vetNovaMensagem.length; i += 2) {
+        let duplaDaVez = vetNovaMensagem.slice(i, i+2);
+        pares.push(duplaDaVez);
+    }
+
+    //console.log("pares: " + pares);
+    pares.forEach(par => {
+        console.log("par: " + par);
+    });
+}
+
+manipularMensagem();
