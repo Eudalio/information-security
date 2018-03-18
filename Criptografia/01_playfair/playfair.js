@@ -120,8 +120,23 @@ function preencherMatrizComChave(vetChave){
         }
     }
 
-    // console.log("matriz depois: " + matriz);
+    //console.log("matriz com chave: " + matriz);
 }
 
 preencherMatrizComChave(stringToArray(chave));
 
+function preencherMatrizComAlfabeto(novoAlfabeto){
+    for(let i = 0; i < novoAlfabeto.length; i++){
+        if( coluna % 5 !== 0 || coluna === 0 ){
+            matriz[linha][coluna] = novoAlfabeto[i];
+            coluna++;
+        }else{
+            linha ++;
+            coluna = 0;
+            i--;
+        }
+    }
+    console.log("matriz completa: " + matriz)
+}
+
+preencherMatrizComAlfabeto(tirarLetraDuplicadasAlfabeto(stringToArray(chave),alfabeto));
