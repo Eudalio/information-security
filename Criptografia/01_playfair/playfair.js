@@ -208,7 +208,7 @@ function quebraNovaMensagemEmPares(novaMensagem){
 function coordenadas(pares){
         let coord = [];
         let i = 0;
-        //console.log(matriz);
+        console.log(matriz);
         //console.log(pares);
 
         // 1º Tentativa
@@ -244,4 +244,23 @@ function coordenadas(pares){
     return coord;
 }
 
-coordenadas(quebraNovaMensagemEmPares(manipularMensagem()));
+function criptografarMensagem(coord){
+    let mensagemCriptografada = '';
+    
+    for(let i = 1; i < coord.length; i += 2){
+        if(coord[i-1].linha === coord[i].linha){
+            mensagemCriptografada += matriz[coord[i-1].linha][((coord[i-1].coluna) + 1)%5];
+            mensagemCriptografada += matriz[coord[i].linha][((coord[i].coluna) + 1)%5];            
+        }else if(coord[i-1].coluna === coord[i].coluna){
+            mensagemCriptografada += matriz[((coord[i-1].linha) + 1) % 5][coord[i-1].coluna];
+            mensagemCriptografada += matriz[((coord[i].linha) + 1)% 5][coord[i].coluna];
+        }else{
+            mensagemCriptografada += matriz[coord[i-1].linha][coord[i].coluna];
+            mensagemCriptografada += matriz[coord[i].linha][coord[i-1].coluna];
+        }
+    }
+    //console.log(coord);
+    console.log("Mensagem Criptografada: " + mensagemCriptografada);
+}
+
+criptografarMensagem(coordenadas(quebraNovaMensagemEmPares(manipularMensagem())));
