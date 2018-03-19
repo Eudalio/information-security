@@ -205,5 +205,43 @@ function quebraNovaMensagemEmPares(novaMensagem){
     return pares;
 }
 
-quebraNovaMensagemEmPares(manipularMensagem());
+function coordenadas(pares){
+        let coord = [];
+        let i = 0;
+        //console.log(matriz);
+        //console.log(pares);
 
+        // 1º Tentativa
+
+        /* pares.forEach(par => {
+            par.forEach(letra => {
+                for(let i = 0; i < pares.length*2; i++){
+                    for(let j = 0; j < 5; j++){
+                        for(let k = 0; k < 5; k++){
+                            if(matriz[j][k] == letra){
+                                coord[i] = {'linha': j, 'coluna':k}; 
+                            }
+                            //console.log("linha: " + j + ", coluna: " + k);
+                        }
+                    }
+                }
+            });
+        }); */
+
+        // ---------------------------------------------------------------------------
+
+
+    pares.forEach(par => {
+        par.forEach(letra => {
+            matriz.forEach(coluna => {
+                if(coluna.indexOf(letra) != -1){                 
+                    coord[i] = {'coluna': coluna.indexOf(letra),'linha': Math.floor(matriz.toString().replace(/,/g,"").indexOf(letra)/5)};
+                    i++;
+                }
+            });
+        });
+    });
+    return coord;
+}
+
+coordenadas(quebraNovaMensagemEmPares(manipularMensagem()));
